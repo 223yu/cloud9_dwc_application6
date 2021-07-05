@@ -23,7 +23,7 @@
               <%= render 'favorites/favorite_btn', book: @book %>
             </div>
           </td>
-          <td id='book_comments_count'><%= render 'book_comments/comments_count', book:@book %></td>
+          <td id='book_comments_count'>コメント数：<%= @book.book_comments.count %></td>
             <% if current_user == @book.user %>
               <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
               <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
@@ -36,7 +36,10 @@
       </div>
 
       <div id='book_comment_input'>
-        <%= render 'book_comments/comment_input',book: @book, comment: @comment %>
+        <%= form_with(model:[@book,@comment], remote: true)do |f| %>
+          <%= f.text_area :comment, rows:'5' %>
+          <%= f.submit '送信' %>
+        <% end %>
       </div>
     </div>
   </div>
