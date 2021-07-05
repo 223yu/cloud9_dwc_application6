@@ -1,0 +1,3 @@
+$('#book_comments_index').html("<%= j(render partial: 'book_comments/comments_index', locals: {book: @book}) %>");
+$('#book_comments_input').html("<%= j(render partial: 'book_comments/comment_input', locals: {book: @book, comment: @comment}) %>");
+$('#book_comment_comment').val('')
